@@ -68,6 +68,24 @@
   main .wrap { padding-block: 30px 10px; }
   section + section { margin-top: 38px; }
   h2 { font-family: var(--serif); font-size: 22px; margin: 0 0 4px; }
+
+  nav.onglets { border-bottom: 1px solid var(--trait); margin-bottom: 20px; }
+  nav.onglets .rangee { display: flex; gap: 2px; flex-wrap: wrap; }
+  nav.onglets button {
+    appearance: none; border: 0; background: none; color: var(--doux); cursor: pointer;
+    font: inherit; font-weight: 600; font-size: 14px; padding: 11px 14px;
+    border-bottom: 2px solid transparent; margin-bottom: -1px;
+  }
+  nav.onglets button[aria-selected="true"] { color: var(--encre); border-bottom-color: var(--or); }
+  nav.onglets button:focus-visible { outline: 2px solid var(--or); outline-offset: -4px; }
+
+  .grille-dec { display: grid; gap: 11px; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+  .carte-dec { background: var(--carte); border: 1px solid var(--trait); border-left: 3px solid var(--or); border-radius: 7px; padding: 14px 15px; min-width: 0; }
+  .carte-dec h4 { margin: 0 0 7px; font-size: 15px; display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap; }
+  .carte-dec p { margin: 0; color: var(--doux); font-size: 13.5px; }
+  .etat { font-size: 10.5px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; padding: 2px 7px; border-radius: 3px; white-space: nowrap; }
+  .etat-fait { color: var(--vert); background: color-mix(in srgb, var(--vert) 14%, transparent); }
+  .etat-ouvert { color: var(--or); background: var(--or-clair); }
   .chapo { color: var(--doux); font-size: 14px; margin: 0 0 16px; max-width: 64ch; }
 
   table.seance { width: 100%; border-collapse: collapse; font-size: 14.5px; }
@@ -136,15 +154,29 @@
     </section>
 
     <section>
-      <h2>Le calendrier de préparation</h2>
-      <p class="chapo">Le calendrier éprouvé des éditions précédentes court sur sept semaines ; il en reste deux, et les jalons se rattrapent groupés.</p>
-      <div id="cal"></div>
-    </section>
+      <h2>La préparation</h2>
+      <nav class="onglets">
+        <div class="rangee" role="tablist">
+          <button role="tab" id="t-cal" aria-selected="true" aria-controls="v-cal">Calendrier</button>
+          <button role="tab" id="t-liv" aria-selected="false" aria-controls="v-liv">Livrables</button>
+          <button role="tab" id="t-dec" aria-selected="false" aria-controls="v-dec">Décisions</button>
+        </div>
+      </nav>
 
-    <section>
-      <h2>Les livrables</h2>
-      <p class="chapo">Ce que la séance exige d'avoir produit, du carton d'invitation au dossier remis au participant.</p>
-      <ul class="liste" id="liv"></ul>
+      <div id="v-cal" role="tabpanel" aria-labelledby="t-cal">
+        <p class="chapo">Le calendrier éprouvé des éditions précédentes court sur sept semaines ; il en reste deux, et les jalons se rattrapent groupés.</p>
+        <div id="cal"></div>
+      </div>
+
+      <div id="v-liv" role="tabpanel" aria-labelledby="t-liv" hidden>
+        <p class="chapo">Ce que la séance exige d'avoir produit, du carton d'invitation au dossier remis au participant.</p>
+        <ul class="liste" id="liv"></ul>
+      </div>
+
+      <div id="v-dec" role="tabpanel" aria-labelledby="t-dec" hidden>
+        <p class="chapo">Les arbitrages qui commandent le reste : ce qui est tranché, et ce qui attend encore une réponse.</p>
+        <div class="grille-dec" id="dec"></div>
+      </div>
     </section>
 
   </div>
@@ -224,6 +256,21 @@
     [0, "L10 — Renfort humain et transport des étudiants", "Appui du secrétariat technique, bus et points de prise en charge."]
   ];
 
+  var DEC = [
+    [1, "Le partenariat de la séance", "Quatre institutions portent le séminaire : le Fonds, le ministère de l'Économie, des Finances et du Budget, le ministère du Plan, de la Coopération internationale et du Développement, et la Banque centrale. Le même jeu de logos sert les quatre supports de salle."],
+    [1, "La composition du panel", "Trois autorités, sans allocution d'ouverture ni keynote speaker, dont la disponibilité n'était pas assurée. Présentation, puis interventions, puis discussion."],
+    [1, "Le découpage horaire", "La séance tient de 9h00 à 11h30. Les trente minutes retirées l'ont été sur l'installation, le panel et les questions ; la présentation et les trois interventions sont intactes."],
+    [1, "Le modèle de carton d'invitation", "Le carton clair et centré, décliné d'un modèle de juin 2025, l'emporte sur la version marine et or. Une variante d'une seule face sert l'envoi par courriel."],
+    [1, "La date portée par la couverture du rapport", "Novembre 2026, le mois de l'examen par le Conseil d'administration. Le numéro du rapport n'est attribué qu'à la publication."],
+    [1, "L'équilibre du carton", "Date, heure et lieu passés sous les couvertures des rapports, couvertures remontées, textes agrandis, sceau du Fonds gardé à une taille harmonieuse."],
+    [1, "Le format du cocktail", "Cent couverts pour cent cinquante invités : quatre-vingt-dix dans l'espace commun, dix en salle VIP, plus une pause-café à l'arrivée. Le service est prêt à la fin de la séance."],
+    [0, "Le modèle de courriel d'invitation", "Un prototype où seuls les noms changent : le visuel dans le corps du message, le carton joint en PDF, un texte court. À figer avant le premier envoi."],
+    [0, "Les documents joints aux invitations", "L'agenda n'est pas encore validé et ne part donc pas avec les invitations ; un second courriel suivra en début de la semaine du séminaire, avec les documents à partager."],
+    [0, "Le nombre d'étudiants invités", "Cinquante sont prévus. Le nombre se décide après la visite de salle du mardi 24, la capacité de la salle et l'expérience de l'édition précédente faisant foi. Un transport groupé est prévu."],
+    [0, "Un représentant du secteur privé au panel", "Le temps est court et la présentation dense, ce qui plaide pour un panel resserré. Les invités du secteur privé et de la société civile peuvent intervenir depuis la salle."],
+    [0, "L'intitulé porté par les sceaux ministériels", "Les sceaux disponibles portent des intitulés antérieurs aux dernières réorganisations. Une réponse des cabinets est attendue ; sans retour, l'impression part avec les sceaux en usage."]
+  ];
+
   function jmoins() {
     var now = new Date();
     var a = new Date(now.getFullYear(), now.getMonth(), now.getDate());
@@ -269,6 +316,31 @@
 
   var liv = document.getElementById("liv");
   LIV.forEach(function (t) { liv.appendChild(ligne(t[0], t[1], t[2], "")); });
+
+  var dec = document.getElementById("dec");
+  DEC.forEach(function (t) {
+    var c = document.createElement("div"); c.className = "carte-dec";
+    var h = document.createElement("h4");
+    h.appendChild(document.createTextNode(t[1]));
+    var e = document.createElement("span");
+    e.className = "etat " + (t[0] ? "etat-fait" : "etat-ouvert");
+    e.textContent = t[0] ? "tranché" : "en attente";
+    h.appendChild(e);
+    var p = document.createElement("p"); p.textContent = t[2];
+    c.appendChild(h); c.appendChild(p);
+    dec.appendChild(c);
+  });
+
+  var onglets = [["t-cal", "v-cal"], ["t-liv", "v-liv"], ["t-dec", "v-dec"]];
+  onglets.forEach(function (paire) {
+    document.getElementById(paire[0]).addEventListener("click", function () {
+      onglets.forEach(function (p) {
+        var actif = p[0] === paire[0];
+        document.getElementById(p[0]).setAttribute("aria-selected", actif ? "true" : "false");
+        document.getElementById(p[1]).hidden = !actif;
+      });
+    });
+  });
 
   document.getElementById("avancement").textContent = faits + " / " + total;
 })();
