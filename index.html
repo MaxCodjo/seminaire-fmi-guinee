@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Séminaire du 2 décembre — FMI Guinée</title>
+<meta name="description" content="Séminaire de diffusion du FMI à Conakry, mercredi 2 décembre 2026 : mise à jour des Perspectives économiques régionales, Article IV 2026 et programme FEC MEDC.">
+</head>
+<body>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Spectral:wght@600;700&display=swap">
+<style>
+  /* Bandeau marine du carton d'invitation, puis trois sections en lecture seule :
+     la séance heure par heure, le calendrier de préparation jour par jour, les livrables. */
+  :root {
+    --nuit: #16233f;
+    --nuit-haut: #223154;
+    --encre: #1b2232;
+    --papier: #f6f4ef;
+    --carte: #ffffff;
+    --trait: #e0dbd0;
+    --doux: #6b7383;
+    --or: #c8922a;
+    --or-clair: #f3e6c8;
+    --vert: #2f7d52;
+    --sur-nuit: #c7cedd;
+    --sur-nuit-doux: #94a0b8;
+    --serif: Spectral, Georgia, "Times New Roman", serif;
+    --sans: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --nuit: #0e1728; --nuit-haut: #1a2540; --encre: #e8e6e1; --papier: #11141b;
+      --carte: #1a1f2a; --trait: #2c3342; --doux: #99a1b0; --or: #e0ad46;
+      --or-clair: #3a2f18; --vert: #6cc08c; --sur-nuit: #c7cedd; --sur-nuit-doux: #94a0b8;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --nuit: #0e1728; --nuit-haut: #1a2540; --encre: #e8e6e1; --papier: #11141b;
+    --carte: #1a1f2a; --trait: #2c3342; --doux: #99a1b0; --or: #e0ad46;
+    --or-clair: #3a2f18; --vert: #6cc08c; --sur-nuit: #c7cedd; --sur-nuit-doux: #94a0b8;
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--papier); color: var(--encre);
+    font-family: var(--sans); font-size: 15px; line-height: 1.55;
+  }
+  .gutter {
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+  }
+  .wrap { max-width: 920px; margin: 0 auto; }
+
+  header.band { background: linear-gradient(135deg, var(--nuit) 0%, var(--nuit-haut) 100%); color: #fff; }
+  header.band .wrap { padding-block: 30px 26px; }
+  .eyebrow { font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--or); font-weight: 600; margin: 0 0 10px; }
+  h1 { font-family: var(--serif); font-weight: 700; font-size: clamp(27px, 5.2vw, 40px); line-height: 1.1; margin: 0 0 8px; text-wrap: balance; }
+  .sous { margin: 0; color: var(--sur-nuit); font-size: 14.5px; max-width: 60ch; }
+  .reperes { display: flex; flex-wrap: wrap; gap: 14px 30px; margin-top: 22px; align-items: baseline; }
+  .reperes .bloc { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+  .reperes .j { font-family: var(--serif); font-size: 38px; font-weight: 700; color: var(--or); line-height: 1; font-variant-numeric: tabular-nums; }
+  .reperes .val { font-size: 15px; font-weight: 600; color: #fff; }
+  .reperes .lab { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--sur-nuit-doux); }
+  .drapeau { display: flex; width: 72px; height: 5px; margin-top: 20px; }
+  .drapeau span { flex: 1; }
+
+  main .wrap { padding-block: 30px 10px; }
+  section + section { margin-top: 38px; }
+  h2 { font-family: var(--serif); font-size: 22px; margin: 0 0 4px; }
+  .chapo { color: var(--doux); font-size: 14px; margin: 0 0 16px; max-width: 64ch; }
+
+  table.seance { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+  table.seance th, table.seance td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--trait); vertical-align: baseline; }
+  table.seance th { width: 9.5em; font-weight: 600; color: var(--or); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  table.seance tr:last-child td, table.seance tr:last-child th { border-bottom: 0; }
+  .cadre { background: var(--carte); border: 1px solid var(--trait); border-radius: 8px; overflow: hidden; }
+
+  h3.jour { font-size: 13px; letter-spacing: .04em; text-transform: uppercase; color: var(--doux); margin: 24px 0 9px; display: flex; align-items: center; gap: 9px; flex-wrap: wrap; }
+  h3.jour:first-of-type { margin-top: 0; }
+  h3.jour .jm { font-size: 11px; font-weight: 700; letter-spacing: .06em; color: var(--or); background: var(--or-clair); padding: 2px 7px; border-radius: 3px; text-transform: none; }
+  ul.liste { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 7px; }
+  li.ligne {
+    background: var(--carte); border: 1px solid var(--trait); border-radius: 7px;
+    display: grid; grid-template-columns: auto 1fr auto; gap: 11px; align-items: start; padding: 11px 13px;
+  }
+  li.ligne[data-fait="1"] { opacity: .6; }
+  .puce { width: 17px; height: 17px; margin-top: 2px; border-radius: 4px; border: 1.5px solid var(--doux); display: grid; place-content: center; font-size: 12px; font-weight: 700; color: transparent; }
+  li.ligne[data-fait="1"] .puce { background: var(--vert); border-color: var(--vert); color: #fff; }
+  .corps { min-width: 0; }
+  .titre { font-weight: 600; }
+  .detail { color: var(--doux); font-size: 13.5px; margin-top: 2px; }
+  .qui { font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--doux); white-space: nowrap; padding-top: 3px; }
+
+  footer { border-top: 1px solid var(--trait); color: var(--doux); font-size: 12.5px; margin-top: 36px; }
+  footer .wrap { padding-block: 16px 32px; }
+  @media (max-width: 520px) {
+    li.ligne { grid-template-columns: auto 1fr; }
+    .qui { grid-column: 2; padding-top: 0; }
+    table.seance th { width: auto; display: block; border-bottom: 0; padding-bottom: 0; }
+    table.seance td { display: block; padding-top: 2px; }
+  }
+</style>
+
+<header class="band gutter">
+  <div class="wrap">
+    <p class="eyebrow">Fonds monétaire international · Représentation résidente en Guinée</p>
+    <h1>L'Afrique subsaharienne et la Guinée à un tournant</h1>
+    <p class="sous">Séminaire de diffusion : mise à jour des Perspectives économiques régionales d'octobre 2026, consultation au titre de l'Article IV 2026 et nouveau programme FEC MEDC.</p>
+    <div class="reperes">
+      <div class="bloc"><span class="j" id="jmoins">—</span><span class="lab">avant la séance</span></div>
+      <div class="bloc"><span class="val">Mercredi 2 décembre 2026 · 9h00 – 11h30</span><span class="lab">Hôtel Noom, Conakry</span></div>
+      <div class="bloc"><span class="val" id="avancement">—</span><span class="lab">jalons franchis</span></div>
+    </div>
+    <div class="drapeau" aria-hidden="true"><span style="background:#ce1126"></span><span style="background:#fcd116"></span><span style="background:#009460"></span></div>
+  </div>
+</header>
+
+<main class="gutter">
+  <div class="wrap">
+
+    <section>
+      <h2>La séance</h2>
+      <p class="chapo">Deux heures trente, de 9h00 à 11h30. La présentation et les trois interventions tiennent le cœur du temps ; la discussion ferme la matinée.</p>
+      <div class="cadre">
+        <table class="seance">
+          <tbody>
+            <tr><th>9h00 – 9h15</th><td>Accueil et installation des invités</td></tr>
+            <tr><th>9h15 – 9h50</th><td>Présentation du Représentant résident : perspectives régionales, Article IV 2026 et programme FEC MEDC</td></tr>
+            <tr><th>9h50 – 10h50</th><td>Interventions des trois autorités, vingt minutes chacune</td></tr>
+            <tr><th>10h50 – 11h10</th><td>Panel modéré</td></tr>
+            <tr><th>11h10 – 11h30</th><td>Questions et échange avec la salle</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <h2>Le calendrier de préparation</h2>
+      <p class="chapo">Le calendrier éprouvé des éditions précédentes court sur sept semaines ; il en reste deux, et les jalons se rattrapent groupés.</p>
+      <div id="cal"></div>
+    </section>
+
+    <section>
+      <h2>Les livrables</h2>
+      <p class="chapo">Ce que la séance exige d'avoir produit, du carton d'invitation au dossier remis au participant.</p>
+      <ul class="liste" id="liv"></ul>
+    </section>
+
+  </div>
+</main>
+
+<footer class="gutter"><div class="wrap">
+  Page publique du séminaire, état au 20 novembre 2026. Elle suit la préparation ; les arbitrages internes, les éléments contractuels et les montants n'y figurent pas.
+</div></footer>
+
+<script>
+(function () {
+  var JOUR_J = new Date(2026, 11, 2);
+
+  var CAL = [
+    ["jeudi 19 novembre", "J-13", [
+      [1, "Paquet repassé au mercredi 2 décembre", "Date reprise dans les sept emplacements du paquet : présentation, agenda, notes, questions-réponses, fiche de répétition, carton et plan logistique.", "Équipe"],
+      [1, "Agenda redécoupé, sans allocution d'ouverture", "Présentation de 35 minutes, trois interventions de 20 minutes, panel et questions.", "Équipe"],
+      [1, "Carton d'invitation reconstruit, présentation revérifiée", "33 diapositives, contrôle d'intégrité du fichier passé.", "Équipe"]
+    ]],
+    ["vendredi 20 novembre", "J-12", [
+      [1, "Lettres d'information aux trois institutions", "Ministère de l'Économie, des Finances et du Budget ; ministère du Plan, de la Coopération internationale et du Développement ; Banque centrale.", "RR"],
+      [1, "Jeu de logos arrêté et transmis", "FMI, MEFB, MPCID, BCRG — le même jeu pour la bâche de scène, le mur de logos, la bâche extérieure et la jupe de table.", "RR"],
+      [1, "Modèle de carton d'invitation arrêté", "Format 210 × 100 mm, couvertures des deux rapports, date, heure et lieu en bandeau.", "RR"],
+      [0, "Première version de l'agenda aux finances", "Organisée en deux volets : l'Article IV d'un côté, les perspectives régionales de l'autre.", "RR"],
+      [0, "Composition du panel soumise pour validation", "Trois autorités, sans keynote speaker.", "RR"],
+      [0, "Éléments remis au prestataire de communication", "Visuels des deux rapports, logos du photocall, choix retenus.", "Comm."],
+      [0, "Devis des prestataires rassemblés", "Traiteur rentré ; impression, hôtesses, transport et communication à compléter.", "Logistique"],
+      [0, "Listes d'invitation tirées de la base", "Sept collèges, à jour de l'organigramme ministériel.", "Logistique"],
+      [0, "Feu vert à l'impression", "Un des trois jalons qui ne se rattrapent pas.", "RR"]
+    ]],
+    ["lundi 23 novembre", "J-9", [
+      [0, "Envoi des invitations, en une seule journée", "Le visuel dans le corps du message, le carton joint en PDF.", "Logistique"],
+      [0, "Préparation de la salle", "Séance de travail à l'hôtel, avec l'appui du secrétariat technique.", "Logistique"],
+      [0, "Demande de transport groupé pour les étudiants", "Un bus, pour une arrivée ensemble.", "Logistique"]
+    ]],
+    ["mardi 24 novembre", "J-8", [
+      [0, "Visite de salle, 16h00", "Disposition, nombre d'étudiants, position des hôtesses, mode et moment de la mise en place.", "Équipe"],
+      [0, "Bios et portraits des intervenants", "Quatre notices, plus le modérateur.", "Comm."]
+    ]],
+    ["mercredi 25 novembre", "J-7", [
+      [0, "Confirmation nominative des trois intervenants", "", "RR"]
+    ]],
+    ["jeudi 26 novembre", "J-6", [
+      [0, "Livraison des prestataires", "Bâche de scène, mur de logos, kakémonos, cartons, jupe de table.", "Logistique"],
+      [0, "Hôtesses et agents d'accueil recrutés et briefés", "Positions arrêtées à la visite de salle, responsabilités réparties.", "Logistique"]
+    ]],
+    ["vendredi 27 novembre", "J-5", [
+      [0, "Affichage extérieur", "", "Prestataires"],
+      [0, "Rencontres préparatoires avec la presse", "Média par média, séparément.", "RR"],
+      [0, "Relance par courriel", "Agenda et visuel joints.", "Logistique"]
+    ]],
+    ["lundi 30 novembre", "J-2", [
+      [0, "Second courriel aux invités", "L'agenda s'il est disponible, et les documents à partager.", "Logistique"],
+      [0, "Répétition et questions-réponses", "Dix questions chronométrées, plus trois hors document.", "RR"],
+      [0, "Simulation de mise en place en salle", "Un des trois jalons qui ne se rattrapent pas.", "Équipe"]
+    ]],
+    ["mardi 1er décembre", "J-1", [
+      [0, "Mise en place définitive", "", "Équipe"],
+      [0, "Impression du dossier du participant", "", "Logistique"],
+      [0, "Dernière relance", "", "Logistique"]
+    ]],
+    ["mercredi 2 décembre", "Jour J", [
+      [0, "Séminaire, 9h00 – 11h30, Hôtel Noom", "Accueil dès 9h00, séance jusqu'à 11h30, cocktail à la sortie.", ""]
+    ]]
+  ];
+
+  var LIV = [
+    [1, "L1 — Lettres d'information aux trois institutions", "Rédigées, datées de Conakry et envoyées."],
+    [0, "L2 — Lettre d'invitation et jeu de PDF signés", "Pour les autorités et les invités de marque."],
+    [0, "L3 — Courriel d'envoi et listes de diffusion", "Un modèle figé où seuls les noms changent."],
+    [0, "L4 — Jeu de visuels de salle", "Bâche de scène, mur de logos, bâche extérieure, kakémonos, jupe de table."],
+    [0, "L5 — Dossier des intervenants", "Quatre notices et la planche photos, plus un jeu de remplacement."],
+    [0, "L6 — Dossier du participant", "Perspectives régionales en français, messages clés, communiqué du Conseil, agenda, bios, feuille de présence."],
+    [0, "L7 — Modèle de courriel d'invitation", "Visuel dans le corps du message, carton joint en PDF, texte court."],
+    [0, "L8 — Dossier du prestataire de communication", "Podcasts, photocall, visuels tirés des deux rapports."],
+    [0, "L9 — Mise à jour de dix pages et rapport Article IV", "À joindre au second courriel, avec l'agenda."],
+    [0, "L10 — Renfort humain et transport des étudiants", "Appui du secrétariat technique, bus et points de prise en charge."]
+  ];
+
+  function jmoins() {
+    var now = new Date();
+    var a = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    return Math.round((JOUR_J - a) / 86400000);
+  }
+  var jm = jmoins();
+  document.getElementById("jmoins").textContent = jm > 0 ? "J-" + jm : (jm === 0 ? "Jour J" : "—");
+
+  function ligne(fait, titre, detail, qui) {
+    var li = document.createElement("li");
+    li.className = "ligne"; li.dataset.fait = fait ? "1" : "0";
+    var p = document.createElement("div");
+    p.className = "puce"; p.textContent = "✓";
+    p.setAttribute("role", "img");
+    p.setAttribute("aria-label", fait ? "fait" : "à faire");
+    var corps = document.createElement("div");
+    corps.className = "corps";
+    var t = document.createElement("div"); t.className = "titre"; t.textContent = titre;
+    corps.appendChild(t);
+    if (detail) { var dd = document.createElement("div"); dd.className = "detail"; dd.textContent = detail; corps.appendChild(dd); }
+    li.appendChild(p); li.appendChild(corps);
+    if (qui) { var q = document.createElement("div"); q.className = "qui"; q.textContent = qui; li.appendChild(q); }
+    return li;
+  }
+
+  var cal = document.getElementById("cal");
+  var total = 0, faits = 0;
+  CAL.forEach(function (groupe) {
+    var h = document.createElement("h3");
+    h.className = "jour";
+    h.appendChild(document.createTextNode(groupe[0]));
+    var jmBadge = document.createElement("span");
+    jmBadge.className = "jm"; jmBadge.textContent = groupe[1];
+    h.appendChild(jmBadge);
+    cal.appendChild(h);
+    var ul = document.createElement("ul"); ul.className = "liste";
+    groupe[2].forEach(function (t) {
+      total++; if (t[0]) faits++;
+      ul.appendChild(ligne(t[0], t[1], t[2], t[3]));
+    });
+    cal.appendChild(ul);
+  });
+
+  var liv = document.getElementById("liv");
+  LIV.forEach(function (t) { liv.appendChild(ligne(t[0], t[1], t[2], "")); });
+
+  document.getElementById("avancement").textContent = faits + " / " + total;
+})();
+</script>
+</body>
+</html>
